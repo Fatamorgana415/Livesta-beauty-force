@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакти</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Зв'яжіться з нами</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Головна</a></li>
+                <li><a href="produkt.html">Продукти</a></li>
+                <li><a href="about.html">Про нас</a></li>
+                <li><a href="contacts.html" class="active">Контакти</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="contact-info">
+            <h2>Наші контакти</h2>
+            <p><strong>Адреса:</strong> м. Київ, вул. Краси, 15</p>
+            <p><strong>Телефон:</strong> +38 (067) 123-45-67</p>
+            <p><strong>Email:</strong> info@livesta.com</p>
+            <p><strong>Години роботи:</strong> Пн–Пт, 09:00–18:00</p>
+        </section>
+
+        <section class="contact-form">
+            <h2>Напишіть нам</h2>
+            <form action="send_message.php" method="post">
+                <label for="name">Ім’я:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Повідомлення:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+
+                <button type="submit">Надіслати</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 LIVESTA. Усі права захищені.</p>
+    </footer>
+</body>
+</html>
