@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>LIVESTA — Рандомний подарунок</title>
+<style>
+  body {
+    font-family: Inter, sans-serif;
+    background: #f7f7fb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+  }
+
+  .section {
+    text-align: center;
+    background: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+
+  h2 {
+    color: #ff006e;
+    margin-bottom: 20px;
+  }
+
+  .gift-box {
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg,#ff8fab,#ffd6a5);
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    color: #fff;
+    margin: 0 auto 20px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .gift-box.animate {
+    animation: bounce 0.6s;
+  }
+
+  @keyframes bounce {
+    0% { transform: translateY(0); }
+    25% { transform: translateY(-15px); }
+    50% { transform: translateY(0); }
+    75% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
+  }
+
+  .btn-luck {
+    background: linear-gradient(90deg,#7ac7ff,#ff8fab);
+    border: none;
+    padding: 14px 28px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    transition: transform 0.3s;
+  }
+
+  .btn-luck:hover {
+    transform: scale(1.05);
+  }
+
+  .result {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #ff006e;
+    font-size: 20px;
+    min-height: 24px;
+  }
+</style>
+</head>
+<body>
+
+<div class="section">
+  <h2>Випробуй свою удачу!</h2>
+  <div class="gift-box" id="giftBox">🎁</div>
+  <button class="btn-luck" id="spinBtn">Випробуй свою удачу</button>
+  <div class="result" id="result"></div>
+</div>
+
+<script>
+const prizes = ["30% знижка","Безкоштовна доставка","Подарунок-тестер","-20% догляд","100 грн бонус","-15% каталог"];
+const giftBox = document.getElementById("giftBox");
+const spinBtn = document.getElementById("spinBtn");
+const result = document.getElementById("result");
+
+spinBtn.addEventListener("click", () => {
+  spinBtn.disabled = true;
+  result.textContent = "";
+  
+  // Анімація коробочки
+  giftBox.classList.add("animate");
+
+  setTimeout(() => {
+    giftBox.classList.remove("animate");
+
+    // Випадковий приз
+    const prize = prizes[Math.floor(Math.random()*prizes.length)];
+    result.textContent = `Ваш подарунок: ${prize}`;
+
+    spinBtn.disabled = false;
+  }, 600);
+});
+</script>
+
+</body>
+</html>
