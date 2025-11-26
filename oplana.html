@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LIVESTA — Оплата і доставка</title>
+  <meta name="description" content="Інформація про способи оплати та доставки замовлень в LIVESTA: картки, онлайн-оплата, самовивіз, кур'єр, терміни та відстеження." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --muted:#6b7280;
+      --accent: linear-gradient(90deg,#ff8fab,#ffb6d5);
+      --green:#10b981;
+      --glass: rgba(255,255,255,0.6);
+      --radius:14px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color-scheme: light;
+    }
+    [data-theme="dark"]{
+      --bg:#0b1020;
+      --card:#0f1724;
+      --muted:#9aa4b2;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);padding:28px;color: #0f1724}
+    .container{max-width:1100px;margin:0 auto}
+
+    header{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:22px}
+    .brand{display:flex;gap:14px;align-items:center}
+    .logo{width:48px;height:48px;border-radius:10px;background:var(--accent);display:grid;place-items:center;color:white;font-weight:700}
+    h1{font-size:20px;margin:0}
+    p.lead{margin:6px 0 0;color:var(--muted)}
+
+    .card{background:var(--card);border-radius:var(--radius);padding:20px;box-shadow:0 6px 20px rgba(10,10,20,0.04);margin-bottom:18px}
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:18px}
+
+    /* Payment list */
+    .methods{display:flex;flex-direction:column;gap:12px}
+    .method{display:flex;gap:12px;align-items:center;padding:12px;border-radius:12px;border:1px solid rgba(15,23,36,0.04)}
+    .method svg{width:36px;height:24px}
+    .method h3{margin:0;font-size:15px}
+    .muted{color:var(--muted);font-size:13px}
+
+    /* Delivery */
+    .deliveries{display:flex;flex-direction:column;gap:12px}
+    .delivery{display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:12px;border:1px dashed rgba(15,23,36,0.04)}
+    .delivery .info{display:flex;gap:12px;align-items:center}
+
+    /* Sidebar */
+    .sidebar .summary{display:flex;flex-direction:column;gap:8px}
+    .price{font-weight:700;font-size:18px}
+
+    /* FAQ accordion */
+    .faq-item{border-top:1px solid rgba(15,23,36,0.04);padding:12px 0}
+    .faq-question{display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+    .faq-answer{margin-top:8px;color:var(--muted);display:none}
+    .faq-item.open .faq-answer{display:block}
+
+    /* small screens */
+    @media (max-width:880px){
+      .grid{grid-template-columns:1fr;}
+      .sidebar{order:2}
+    }
+
+    /* accessibility helpers */
+    .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+
+    /* theme toggle */
+    .theme-toggle{display:inline-flex;gap:8px;align-items:center}
+    .toggle-btn{padding:6px;border-radius:999px;border:1px solid rgba(15,23,36,0.06);background:transparent;cursor:pointer}
+  </style>
+</head>
+<body>
+  <div class="container" id="page">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">L</div>
+        <div>
+          <h1>LIVESTA — Оплата і доставка</h1>
+          <p class="lead">Прозоро про оплату, доставку та повернення</p>
+        </div>
+      </div>
+      <div class="controls">
+        <div class="theme-toggle" aria-hidden="false">
+          <button id="themeBtn" class="toggle-btn" aria-pressed="false" title="Перемкнути тему">🌓</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="grid" role="main">
+      <section class="card" aria-labelledby="paymentTitle">
+        <h2 id="paymentTitle">Способи оплати</h2>
+        <p class="muted">Виберіть найбільш зручний для вас спосіб оплати. Ми працюємо з безпечними платіжними провайдерами.</p>
+
+        <div class="methods" role="list">
+          <article class="method" role="listitem" aria-label="Оплата карткою">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2" stroke="currentColor" stroke-width="1.2"/></svg>
+            <div>
+              <h3>Оплата карткою (Visa, Mastercard, MIR)</h3>
+              <div class="muted">Приймаємо картки онлайн через безпечний платіжний шлюз</div>
+            </div>
+          </article>
+
+          <article class="method" role="listitem" aria-label="Онлайн гаманець">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7h18v10H3z" stroke="currentColor" stroke-width="1.2" /></svg>
+            <div>
+              <h3>Apple Pay / Google Pay</h3>
+              <div class="muted">Миттєва оплата з вашого мобільного гаманця</div>
+            </div>
+          </article>
+
+          <article class="method" role="listitem" aria-label="Післяплата">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.2"/></svg>
+            <div>
+              <h3>Післяплата (готівка при отриманні)</h3>
+              <div class="muted">Доступно при доставці кур'єром або у відділенні перевізника. Можлива додаткова комісія.</div>
+            </div>
+          </article>
+
+          <article class="method" role="listitem" aria-label="Банківський переказ">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16" stroke="currentColor" stroke-width="1.2"/></svg>
+            <div>
+              <h3>Банківський переказ / оплата на рахунок</h3>
+              <div class="muted">Після оплати надішліть підтвердження для пришвидшення обробки замовлення.</div>
+            </div>
+          </article>
+
+          <article class="method" role="listitem" aria-label="Оплата частинами">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.2"/></svg>
+            <div>
+              <h3>Оплата частинами (розстрочка)</h3>
+              <div class="muted">Доступна через партнерів-банків за умовами банку.</div>
+            </div>
+          </article>
+        </div>
+
+        <hr style="margin:18px 0;border:none;border-top:1px solid rgba(15,23,36,0.05)" />
+
+        <h3>Безпека платежів</h3>
+        <p class="muted">Ми не зберігаємо дані ваших карт. Всі онлайн-платежі проходять через сертифіковані платіжні системи з шифруванням (PCI DSS).</p>
+      </section>
+
+      <aside class="card sidebar" aria-labelledby="summaryTitle">
+        <h2 id="summaryTitle">Коротко</h2>
+        <div class="summary">
+          <div>Термін обробки замовлення: <strong>1–2 робочих дні</strong></div>
+          <div>Повернення: <strong>14 днів</strong> (деталі у політиці повернення)</div>
+          <div>Підтримка: <a href="mailto:help@livesta.example">help@livesta.example</a></div>
+        </div>
+
+        <hr style="margin:12px 0;border:none;border-top:1px solid rgba(15,23,36,0.05)" />
+
+        <div>
+          <div class="price">Приклад вартості доставки</div>
+          <ul class="muted" style="padding-left:18px;margin:8px 0">
+            <li>Кур'єр по місту — від 49 ₴</li>
+            <li>Доставка службою (Нова Пошта, Укрпошта) — від 39 ₴</li>
+            <li>Самовивіз — безкоштовно</li>
+          </ul>
+        </div>
+      </aside>
+
+      <section class="card" aria-labelledby="deliveryTitle">
+        <h2 id="deliveryTitle">Способи доставки</h2>
+        <p class="muted">Ми працюємо з надійними перевізниками — вибір залежить від вашого міста та побажань.</p>
+
+        <div class="deliveries">
+          <div class="delivery" role="group" aria-label="Кур'єрська доставка">
+            <div class="info">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" style="width:40px;height:24px"><path d="M3 7h14v7H3z" stroke="currentColor" stroke-width="1.2"/></svg>
+              <div>
+                <strong>Кур'єрська доставка</strong>
+                <div class="muted">Доставка за адресою: 1–3 робочих дні</div>
+              </div>
+            </div>
+            <div class="muted">Відстеження &middot; Доставка до дверей</div>
+          </div>
+
+          <div class="delivery" role="group" aria-label="Відділення перевізника">
+            <div class="info">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" style="width:40px;height:24px"><rect x="2" y="4" width="20" height="12" rx="2" stroke="currentColor" stroke-width="1.2"/></svg>
+              <div>
+                <strong>Доставка у відділення (Нова Пошта / Укрпошта)</strong>
+                <div class="muted">Термін: 2–5 робочих днів (залежить від регіону)</div>
+              </div>
+            </div>
+            <div class="muted">Відстеження посилки за номером</div>
+          </div>
+
+          <div class="delivery" role="group" aria-label="Самовивіз">
+            <div class="info">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" style="width:40px;height:24px"><circle cx="12" cy="8" r="3" stroke="currentColor" stroke-width="1.2"/></svg>
+              <div>
+                <strong>Самовивіз</strong>
+                <div class="muted">Забрати в магазині або пункті видачі — за домовленістю</div>
+              </div>
+            </div>
+            <div class="muted">Безкоштовно</div>
+          </div>
+        </div>
+
+        <hr style="margin:18px 0;border:none;border-top:1px solid rgba(15,23,36,0.05)" />
+
+        <h3>Відстеження замовлення</h3>
+        <p class="muted">Після відправлення ми надішлемо номер для відстеження. Вкажіть номер замовлення або номер посилки у полі відстеження на сайті перевізника.</p>
+
+        <h3>Особливі умови</h3>
+        <p class="muted">При великому обсязі замовлення або доставці в віддалені регіони можливі додаткові терміни та вартість — менеджер зв'яжеться з вами для уточнення.</p>
+      </section>
+
+      <section class="card" aria-labelledby="faqTitle">
+        <h2 id="faqTitle">Питання й відповіді</h2>
+
+        <div class="faq">
+          <div class="faq-item" id="f1">
+            <div class="faq-question" tabindex="0" role="button" aria-expanded="false" aria-controls="a1">Чи можна оплатити частково — частиною в магазині, частиною онлайн?<span aria-hidden="true">➕</span></div>
+            <div class="faq-answer" id="a1">Так, у деяких випадках це можливо — зв'яжіться з нашою підтримкою для узгодження способу оплати.</div>
+          </div>
+
+          <div class="faq-item" id="f2">
+            <div class="faq-question" tabindex="0" role="button" aria-expanded="false" aria-controls="a2">Які документи потрібні при отриманні в відділенні?</div>
+            <div class="faq-answer" id="a2">Паспорт або інший документ, що підтверджує особу. Для отримання юридичної особи — довіреність та реквізити.</div>
+          </div>
+
+          <div class="faq-item" id="f3">
+            <div class="faq-question" tabindex="0" role="button" aria-expanded="false" aria-controls="a3">Що робити, якщо посилка пошкоджена?</div>
+            <div class="faq-answer" id="a3">Огляньте посилку при отриманні. Зафіксуйте пошкодження фото/відео та негайно зв'яжіться з підтримкою — ми допоможемо оформити претензію.</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer style="margin-top:20px;text-align:center;color:var(--muted);font-size:14px">
+      © <span id="year"></span> LIVESTA — Усі права захищені. <a href="#" style="color:inherit;text-decoration:underline">Політика повернення</a>
+    </footer>
+  </div>
+
+  <script>
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // theme toggle (persists in localStorage)
+    const page = document.getElementById('page');
+    const btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('livesta-theme');
+    if(saved) document.documentElement.setAttribute('data-theme', saved);
+    btn.addEventListener('click', ()=>{
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      if(next === 'dark') document.documentElement.setAttribute('data-theme','dark'); else document.documentElement.removeAttribute('data-theme');
+      btn.setAttribute('aria-pressed', next === 'dark');
+      localStorage.setItem('livesta-theme', next === 'dark' ? 'dark' : 'light');
+    });
+
+    // accessible accordion for FAQ
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', ()=> toggleFaq(q));
+      q.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFaq(q); } });
+    });
+    function toggleFaq(q){
+      const item = q.closest('.faq-item');
+      const expanded = q.getAttribute('aria-expanded') === 'true';
+      q.setAttribute('aria-expanded', String(!expanded));
+      item.classList.toggle('open');
+    }
+  </script>
+</body>
+</html>
